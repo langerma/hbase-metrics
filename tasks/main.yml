@@ -1,0 +1,31 @@
+---
+- name: create /data
+  file:
+    path: /opt/hbase-monitor
+    state: directory
+    owner: hbase
+    group: hdfs
+    mode: 0755
+
+- name: copy jmxexporter
+  copy:
+    src: files/jmx_prometheus_javaagent-0.11.0.jar
+    dest: /opt/hbase-monitor/jmx_prometheus_javaagent.jar
+    owner: hbase
+    group: hdfs
+    mode: 0644
+
+- name: copy jmxexporter config
+  copy:
+    src: files/config.yml
+    dest: /opt/hbase-monitor/config.yml
+    owner: hbase
+    group: hdfs
+    mode: 0644
+
+- name: copy hbase-env.sh
+  copy:
+    src: files/hbase-env.sh
+    dest: /etc/hbase/conf/hbase-env.sh
+    mode: 0755
+
